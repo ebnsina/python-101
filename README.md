@@ -1,6 +1,8 @@
 ## Python Bootcamp 01
 
-## Things will cover:
+#### Join at [discord](https://discord.gg/dEHJt4kY)
+
+### Things will cover:
 
 - Basics
 - Object Oriented Programming (OOP)
