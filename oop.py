@@ -1,5 +1,8 @@
 # class, object, inheritance, encapsulation, abstraction,  polymorphism
 
+from abc import ABC
+
+
 class Location():
     def __init__(self, lat, lng):
         self.lat = lat
@@ -10,10 +13,10 @@ class Location():
 
 
 dhaka = Location(23.8103, 90.4125)
-# print(dhaka)
+print(dhaka)
 
 mexico = Location(23.6345, 102.5528)
-# print(mexico)
+print(mexico)
 
 # 23.8103° N, 90.4125° E (dhaka)
 # 23.6345° N, 102.5528° W (mexico)
@@ -157,31 +160,144 @@ print(can_swim(m))
 print(can_swim(p))
 
 
-# Four Principles:
+# Four Principles: Inheritance, Encapsulation, Abstraction, Polymorphism
 
 # Inheritance: sub class, child class
 
 # Encapsulation: public, private, protected
 
-# Abstraction
+# Abstraction: abstract class
 
-# Polymorphism
-
-
-class CoffeeMaker():
-    def brew(self):
-        return 'Brewing the coffee.'
+# Polymorphism: multiple forms
 
 
-c = CoffeeMaker()
-print(c.brew())
+# Define a class
+class Person():
+    # class attribute
+    job = 'developer'
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def hello(self):
+        return 'hello'
+
+    # class method
+    @classmethod
+    def anonymous(cls):
+        return Person('Anon', 25)
+
+    # static method
+    @staticmethod
+    def create_person():
+        return 'Person created!'
 
 
-class SpecialCoffeeMaker(CoffeeMaker):
-    def brewLatte(self):
-        return 'Brewing a latte'
+p = Person('Jane', 23)
+print(p.job)
+
+# class methods vs. instance methods vs. static methods
+# class.method(), object.method(),
+
+# Encapsulation:  private _, protected __
 
 
-sc = SpecialCoffeeMaker()
-print(sc.brew())
-print(sc.brewLatte())
+class Counter():
+    def __init__(self):
+        self._counter = 0
+
+    def increment(self):
+        self._counter += 1
+
+    def value(self):
+        return self._counter
+
+    def reset(self):
+        self._counter = 0
+
+
+c = Counter()
+
+print(c.value())
+print(c.increment())
+c.counter = -11
+
+print(c.value())
+
+
+# __eq__
+class Person2:
+    def __init__(self, first_name, last_name, age):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.age = age
+
+    def __eq__(self, other):
+        return self.age == other.age
+
+
+john = Person2('John', 'Doe', 25)
+jane = Person2('Jane', 'Doe', 25)
+print(john == jane)  # True
+
+# getter, setter
+
+
+class Person3:
+    def __init__(self, name, age):
+        self.name = name
+        self.set_age(age)
+
+    def set_age(self, age):
+        if age <= 0:
+            raise ValueError('The age must be positive')
+        self._age = age
+
+    def get_age(self):
+        return self._age
+
+    #
+    age = property(fget=get_age, fset=set_age)
+
+
+p3 = Person3('Sarah', 25)
+# p3.age = -1
+# print(p3.age)
+
+
+class Person4:
+    def __init__(self, name, age):
+        self.name = name
+        self.set_age(age)
+
+    @property
+    def age(self):
+        return self.age
+
+    @age.setter
+    def set_age(self, age):
+        if age <= 0:
+            raise ValueError('The age must be positive')
+        self._age = age
+
+    def get_age(self):
+        return self.age
+
+
+# p4 = Person4('Sarah', 24)
+# p4.age = 90
+# print(p4.age)
+
+
+# ABSTRACT CLASS : can not be instantiate
+class Employee(ABC):
+    def __init__(self, name):
+        self.name = name
+
+    def print_name(self):
+        return self.name
+
+
+a = Employee()
+print(a)
