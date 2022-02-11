@@ -290,14 +290,33 @@ class Person4:
 # print(p4.age)
 
 
-# ABSTRACT CLASS : can not be instantiate
-class Employee(ABC):
-    def __init__(self, name):
+
+# Property decorator
+
+class Car():
+    def __init__(self, name, price, year):
         self.name = name
+        self._price = price
+        self.year = year
 
-    def print_name(self):
-        return self.name
+
+    @property
+    def price(self):
+        return self._price
+
+    
+    @price.setter
+    def price(self, new_price):
+        if new_price < 0:
+            print("Price cannot be zero.")
+        else:
+         self._price = new_price
 
 
-a = Employee()
-print(a)
+
+toyota = Car('Toyota', 30000, 2000)
+
+print(toyota.price)
+toyota.price = -1000
+toyota.price = 1000
+print(toyota.price)
