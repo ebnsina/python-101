@@ -310,7 +310,7 @@ class Car():
         if new_price < 0:
             print("Price cannot be zero.")
         else:
-         self._price = new_price
+            self._price = new_price
 
 
 
@@ -320,3 +320,28 @@ print(toyota.price)
 toyota.price = -1000
 toyota.price = 1000
 print(toyota.price)
+
+
+class Customer2():
+    def __init__(self, name, age):
+        self.name = name
+        self._age = age
+
+    @property
+    def age(self):
+        return self._age
+
+    @age.setter
+    def age(self, new_age):
+        if new_age < 0:
+            print("Age cannot be lower than zero.")
+        else:
+            self._age = new_age
+
+
+customer = Customer2('Hello', 100)
+print(f"Customer Age: {customer.age}")
+customer.age = -1
+print(f"Customer Age: {customer.age}")
+customer.age = 90
+print(f"Customer Age: {customer.age}")
