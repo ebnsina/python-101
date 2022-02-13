@@ -18,6 +18,7 @@
     - ```sql
         alter table comments 
         add foreign key (post_id) references posts(id)
+        on update cascade/restrict/set nul
         on delete cascade/restrict/set null
     ```
  - joins 
