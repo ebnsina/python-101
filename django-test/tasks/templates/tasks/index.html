@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <h1>Hello, Django!</h1>
+
+
+   {% if tasks %}
+    <ul>
+        {% for task in tasks %}
+            <li>{{ task.title }}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <li>No task yet! Try adding something.</li>
+   {% endif %}
+{% endblock  %}
