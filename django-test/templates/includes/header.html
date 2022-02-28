@@ -1,12 +1,13 @@
-<header>
+<header class="header">
     <div class="container">
       <div class="header-inner">
-            <a href="{% url 'index' %}">Django Task</a>
+            <a href="{% url 'index' %}" class="logo">Django Task</a>
 
-            <nav>
+            <nav class="menu">
                 <ul>
                     <li><a href="{% url 'index' %}">All Tasks</a></li>
                     <li><a href="{% url 'new' %}">Add New Task</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
                 </ul>
             </nav>
       </div>

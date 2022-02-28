@@ -1,39 +1,38 @@
 {% extends 'base.html' %} 
 
 {% block content %}
-<h1>Hello, Django!</h1>
+<div class="tasks-wrapper">
+    <h2>My Tasks</h2>
 
-{% if tasks %}
-    <ul class="task-lists">
-    {% for task in tasks %}
-        {% if task.complete %}
-         <li>
-            <p class="line-through"> {{ task.title }}</p>
+    {% if tasks %}
+        <ul class="task-lists">
+        {% for task in tasks %}
+            {% if task.complete %}
+            <li class="task-complete">
+                <p class="line-sthrough">
+                    <strong>{{ task.title }}</strong>
+                </p>
 
-            <a class="btn-primary" href="{% url 'task' task.id %}">View</a>
-            <a href="{% url 'edit' task.id %}">Edit</a>
-            <a href="{% url 'delete' task.id %}">Delete</a>
+                <a class="btn btn-primary" href="{% url 'task' task.id %}">View</a>
+                <a class="btn btn-warning" href="{% url 'edit' task.id %}">Edit</a>
+                <a class="btn btn-danger" href="{% url 'delete' task.id %}">Delete</a>
+            </li>
+            {% else %}
+            <li class="task-incomplete">
+                <p>
+                    <strong>{{ task.title }}</strong>
+                </p>
 
-
-            <div>
-                <label for="complete" class="mark-complete">
-                    <input type="checkbox" name="complete" id="complete" /> Mark as complete
-                </label>
-            </div>
-        </li>
+                <a class="btn btn-primary" href="{% url 'task' task.id %}">View</a>
+                <a class="btn btn-warning" href="{% url 'edit' task.id %}">Edit</a>
+                <a class="btn btn-danger" href="{% url 'delete' task.id %}">Delete</a>
+            </li>
+            {% endif %}
+        {% endfor %}
+        </ul>
         {% else %}
-         <li>
-            <p>{{ task.title }}</p>
-
-            <a href="{% url 'task' task.id %}">View</a>
-            <a href="{% url 'edit' task.id %}">Edit</a>
-            <a href="{% url 'delete' task.id %}">Delete</a>
-        </li>
-        {% endif %}
-    {% endfor %}
-    </ul>
-    {% else %}
-    <li>No task yet! Try adding something.</li>
-{% endif %} 
+        <p>No task yet! Try adding something.</p>
+    {% endif %} 
+</div>
 
 {% endblock %}

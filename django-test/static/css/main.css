@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped:wght@100;200;300;400;500;600;700&display=swap');
+
 *,
 *::before,
 *::after {
@@ -6,11 +8,25 @@
     box-sizing: border-box
 }
 
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped:wght@100;200;300;400;500;600;700&display=swap');
-
-
 body {
     font-family: 'IBM Plex Sans Thai Looped', sans-serif;
+}
+
+img {
+    max-width: 100%;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+a {
+    display: inline-block;
+    text-decoration: none;
+    color: inherit;
+    transition: all .2s;
 }
 
 .container {
@@ -18,8 +34,8 @@ body {
     margin: 0 auto;
 }
 
-header {
-    background-color: cyan;
+.header {
+    background-color: #00d8ff;
     padding: 1rem 0;
 }
 
@@ -29,23 +45,24 @@ header {
     align-items: center;
 }
 
-ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-nav ul {
+.menu ul {
     display: flex;
     align-items: center;
 }
 
-nav li {
+.menu li {
     margin-right: 1rem;
 }
 
-.task-lists li {
- margin-bottom: 2rem;
+.menu a {
+    padding: 0.4rem 1rem;
+}
+
+.menu a:focus,
+.menu a:hover {
+    cursor: pointer;
+    background-color: #fff;
+    border-radius: 0.4rem;
 }
 
 .line-through {
@@ -53,9 +70,61 @@ nav li {
     color: lightgreen;;
 }
 
-.btn-primary {
-    background-color: lightgreen;
-    padding: 0.6rem 1rem;
-    text-decoration: none;
-    display: inline-block;
+.btn {
+    padding: 0.1rem 1rem;
+    border-radius: 0.4rem;
+    font-size: 0.875rem;
 }
+
+.btn-primary {
+    background-color: #48dbfb;
+}
+
+.btn-warning {
+    background-color: #feca57;
+}
+
+.btn-danger {
+    background-color: #ff6b6b;
+}
+
+.logo {
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.main {
+    padding: 1rem 0;;
+}
+
+.task-lists {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;;
+}
+
+.tasks-wrapper h2 {
+    margin-bottom: 2rem;
+}
+
+.task-complete {
+    background-color: rgb(120, 224, 143, 0.3);
+    padding: 1rem;
+    border-radius: 0.4rem;
+    width: fit-content;;
+}
+
+.task-incomplete {
+    background-color: mistyrose;
+    padding: 1rem;
+    border-radius: 0.4rem;
+    width: fit-content;;
+}
+
+.task-complete p,
+.task-incomplete p {
+    margin-bottom: 1rem;
+}
+
