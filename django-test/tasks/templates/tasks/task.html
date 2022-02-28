@@ -1,0 +1,10 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+    <h3>{{ task.title }}</h3>
+
+    <p>{{ task.description }}</p>
+
+
+    <a href="{% url 'index' %}">Back to Tasks</a>
+{% endblock %}

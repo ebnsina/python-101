@@ -1,0 +1,16 @@
+Task App
+
+CRUD - Create Read Update Delete
+
+GET :   /tasks - List of all tasks
+GET :   /tasks/:pk - single task
+POST:   /tasks/new - create new task
+PUT :   /tasks/:pk/edit - single task edit
+DELETE: /tasks/:pk/delete - single task delete
+
+
+GET
+POST
+PUT 
+PATCH 
+DELETE 

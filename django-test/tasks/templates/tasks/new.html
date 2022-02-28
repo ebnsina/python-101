@@ -1,0 +1,22 @@
+{% extends 'base.html' %} 
+
+
+{% block content %}
+    <div>
+        <h3>Create New Task</h3>
+
+        <form action="" method="POST">
+            {% csrf_token %}
+            
+            {% comment %} {{ task_form }} {% endcomment %}
+
+            {% for field in task_form %}
+                <div>
+                    <label for="">{{ field.label_tag }}</label>
+                    {{ field }}
+                </div>
+            {% endfor %}
+            <button type="Submit">Submit</button>
+        </form>
+    </div>
+{% endblock %}

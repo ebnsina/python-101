@@ -1,17 +1,39 @@
-{% extends 'base.html' %}
-
+{% extends 'base.html' %} 
 
 {% block content %}
-    <h1>Hello, Django!</h1>
+<h1>Hello, Django!</h1>
+
+{% if tasks %}
+    <ul class="task-lists">
+    {% for task in tasks %}
+        {% if task.complete %}
+         <li>
+            <p class="line-through"> {{ task.title }}</p>
+
+            <a class="btn-primary" href="{% url 'task' task.id %}">View</a>
+            <a href="{% url 'edit' task.id %}">Edit</a>
+            <a href="{% url 'delete' task.id %}">Delete</a>
 
 
-   {% if tasks %}
-    <ul>
-        {% for task in tasks %}
-            <li>{{ task.title }}</li>
-        {% endfor %}
+            <div>
+                <label for="complete" class="mark-complete">
+                    <input type="checkbox" name="complete" id="complete" /> Mark as complete
+                </label>
+            </div>
+        </li>
+        {% else %}
+         <li>
+            <p>{{ task.title }}</p>
+
+            <a href="{% url 'task' task.id %}">View</a>
+            <a href="{% url 'edit' task.id %}">Edit</a>
+            <a href="{% url 'delete' task.id %}">Delete</a>
+        </li>
+        {% endif %}
+    {% endfor %}
     </ul>
     {% else %}
     <li>No task yet! Try adding something.</li>
-   {% endif %}
-{% endblock  %}
+{% endif %} 
+
+{% endblock %}
