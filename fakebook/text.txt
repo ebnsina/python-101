@@ -1,0 +1,8 @@
+FakeBook
+
+
+- Feed
+    - title
+    - description
+    - image / video
+    - timestamp
