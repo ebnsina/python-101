@@ -1,0 +1,23 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+
+{% include 'includes/message.html' %}
+    <section class="flex gap-10">
+       {% include 'includes/left-sidebar.html' %}
+
+        <main class="flex-1">
+            <a href="{% url 'index' %}" class="block text-blue-400 text-sm font-semibold mb-4 hover:underline">Back to Posts</a>
+
+              {% if feed.image %}
+                 <img src="{{ feed.image.url }}" alt={{ feed.title }} class="w-full h-96 object-cover rounded-lg">
+              {% endif %}
+
+            <div class="bg-white rounded-lg mt-6 p-4">
+                <small class="block text-sm text-gray-600 mb-2">{{ feed.posted_at|timesince }} ago</small>
+                <h3 class="text-base font-semibold mb-2">{{ feed.title }}</h3>
+                 <p class="text-sm text-gray-600">{{ feed.description }}</p>
+             </div>
+        </main>
+    </section>
+{% endblock %}

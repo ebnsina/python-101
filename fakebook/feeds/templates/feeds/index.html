@@ -2,21 +2,46 @@
 
 {% block content %}
 
-      {% include 'includes/message.html' %}
+    {% include 'includes/message.html' %}
 
     <section class="flex gap-10">
        {% include 'includes/left-sidebar.html' %}
 
         <main class="flex-1">
             {% for feed in feeds %}
+
+            <div class="modal">
+                <div class="max-w-lg mx-auto bg-white p-4 rounded-lg mt-3">
+                <div class="px-3 py-5 text-center">
+                    <h3 class="text-xl mb-2">Are you sure to delete?</h3>
+                     <p class="text-sm text-gray-700">{{ feed.title }}</p>
+                </div>
+
+                 <div class="flex justify-between items-center">
+                    <button type="button" class="cancel-btn px-4 py-2 bg-gray-300 inline-flex rounded-lg text-gray-800">Cancel</button>
+                     <button type="button" class="confirm-btn px-4 py-2 bg-blue-500 inline-flex rounded-lg text-white" data-id="{{ feed.id }}">Confirm</button>
+                 </div>
+                 </div>
+            </div>
+
                 <div class="bg-white rounded-lg mb-3">
-                    <h3 class="text-base font-semibold mb-2 p-2">{{ feed.title }}</h3>
+
+                    <time class="text-gray-600 text-sm block p-4">{{ feed.posted_at|timesince }} ago</time>
+
                     {% if feed.image %}
-                        <img src="{{ feed.image.url }}" alt={{ feed.title }}>
+                        <img src="{{ feed.image.url }}" alt={{ feed.title }} class="w-full h-72 object-cover">
                     {% endif %}
 
                     <div class="p-4">
+                        <h3 class="text-base font-semibold mb-2">{{ feed.title }}</h3>
                         <p class="text-sm text-gray-600">{{ feed.description }}</p>
+                    </div>
+
+                    <div class="flex justify-between items-center p-4 border-t border-gray-200">
+                        <a href="{% url 'single-post' feed.id %}" class="hover:bg-gray-200 px-4 py-2 rounded-lg transition">View</a>
+                        <a href="{% url 'edit-post' feed.id %}"  class="hover:bg-gray-200 px-4 py-2 rounded-lg transition">Edit</a>
+                        {% comment %} <a href="{% url 'delete-post' feed.id %}" class="delete-btn">Delete</a> {% endcomment %}
+                        <button type="button"  class="delete-btn hover:bg-gray-200 px-4 py-2 rounded-lg transition">Delete</a>
                     </div>
                 </div>
             {% endfor %}

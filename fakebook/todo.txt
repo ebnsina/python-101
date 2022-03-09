@@ -1,0 +1,20 @@
+FakeBook
+
+CRUD
+
+create 
+read
+update
+delete
+
+- Feed
+    - title
+    - description
+    - image / video
+    - timestamp
+
+
+- User/Account
+    - register
+    - login
+    - logout

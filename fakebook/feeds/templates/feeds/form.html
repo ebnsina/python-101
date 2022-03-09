@@ -13,7 +13,12 @@
                         {{ field }}
                     </div>
                 {% endfor %}
-                <button type="submit" class="px-4 py-2 bg-blue-500 inline-flex rounded-lg text-white">Post</button>
+
+                <div class="flex justify-between items-center">
+                     <a href="{% url 'index' %}" class="px-4 py-2 bg-gray-300 inline-flex rounded-lg text-gray-800">Cancel</a>
+                     <button type="submit" class="px-4 py-2 bg-blue-500 inline-flex rounded-lg text-white">Post</button>
+                </div>
+               
            </form>
         </main>
 
