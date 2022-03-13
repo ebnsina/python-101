@@ -1,7 +1,9 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from .models import Feed
 from .forms import FeedForm
+
 
 def index(request):
     feeds = Feed.objects.order_by('-posted_at')
@@ -10,7 +12,7 @@ def index(request):
     })
 
 
-
+@login_required(login_url='login')
 def new_post(request):
     form = FeedForm()
 
@@ -18,7 +20,10 @@ def new_post(request):
         form = FeedForm(request.POST, request.FILES)
 
         if form.is_valid():
-            form.save()
+            feed = form.save(commit=False)
+            feed.posted_by = request.user
+            feed.save()
+
             messages.success(request, "Post created successfully.")
             return redirect('index')
 
@@ -34,6 +39,7 @@ def single_post(request, pk):
     })
 
 
+@login_required(login_url='login')
 def edit_post(request, pk):
     feed = get_object_or_404(Feed, pk=pk)
     form = FeedForm(instance=feed)

@@ -26,7 +26,11 @@
 
                 <div class="bg-white rounded-lg mb-3">
 
-                    <time class="text-gray-600 text-sm block p-4">{{ feed.posted_at|timesince }} ago</time>
+                    <div class="flex justify-center items-center p-4">
+                        <small class="text-gray-600 text-sm block">{{ feed.posted_by }}</small>
+                        &middot;
+                        <time class="text-gray-600 text-sm block">{{ feed.posted_at|timesince }} ago</time>
+                    </div>
 
                     {% if feed.image %}
                         <img src="{{ feed.image.url }}" alt={{ feed.title }} class="w-full h-72 object-cover">
@@ -39,9 +43,13 @@
 
                     <div class="flex justify-between items-center p-4 border-t border-gray-200">
                         <a href="{% url 'single-post' feed.id %}" class="hover:bg-gray-200 px-4 py-2 rounded-lg transition">View</a>
-                        <a href="{% url 'edit-post' feed.id %}"  class="hover:bg-gray-200 px-4 py-2 rounded-lg transition">Edit</a>
+                        
                         {% comment %} <a href="{% url 'delete-post' feed.id %}" class="delete-btn">Delete</a> {% endcomment %}
-                        <button type="button"  class="delete-btn hover:bg-gray-200 px-4 py-2 rounded-lg transition">Delete</a>
+
+                        {% if request.user == feed.posted_by  %}
+                            <a href="{% url 'edit-post' feed.id %}"  class="hover:bg-gray-200 px-4 py-2 rounded-lg transition">Edit</a>
+                            <button type="button"  class="delete-btn hover:bg-gray-200 px-4 py-2 rounded-lg transition">Delete</a>
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}

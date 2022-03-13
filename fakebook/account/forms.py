@@ -5,8 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 class CustomRegisterFrom(UserCreationForm):
     class Meta:
         model = User
-        fields = ['username', 'email', 'first_name',
-                  'last_name', 'password1', 'password2']
+        fields = ['username', 'password1', 'password2']
         # fields = "__all__"
 
     def __init__(self, *args, **kwargs):
@@ -14,4 +13,5 @@ class CustomRegisterFrom(UserCreationForm):
 
         for name, field in self.fields.items():
             field.widget.attrs.update({'class': 'form-control'})
+        
 

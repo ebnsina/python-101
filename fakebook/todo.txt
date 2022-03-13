@@ -18,3 +18,13 @@ delete
     - register
     - login
     - logout
+
+
+    SPA vs. MPA: Authentication Strategy
+    - Session
+    - Cookie
+    - JSON Web Token
+    - Password Less
+
+
+
