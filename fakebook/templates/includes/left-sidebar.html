@@ -2,6 +2,7 @@
     <ul>
         <li><a href="{% url 'post' %}" class="px-4 py-2 w-full hover:bg-gray-200 transition inline-block rounded-lg">Add New Post</a></li>
         {% if request.user.is_authenticated %}
+            <li><a href="{% url 'profile' %}" class="px-4 py-2 w-full hover:bg-gray-200 transition inline-block rounded-lg">My Account</a></li>
             <li><a href="{% url 'post' %}" class="px-4 py-2 w-full hover:bg-gray-200 transition inline-block rounded-lg">{{ request.user}}</a></li>
         {% endif %}
     </ul>

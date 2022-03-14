@@ -1,0 +1,38 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+<section>
+  <div class="bg-white shadow-sm rounded-lg max-w-lg mx-auto p-4">
+    <h3 class="text-2xl font-semibold text-center mb-4">
+      Update your porfile
+    </h3>
+
+    <form action="" method="post" enctype="multipart/form-data">
+      {% csrf_token %} {% for field in form %}
+      <div class="mb-3">
+        <label for="{{ field.id }}" class="block text-sm text-gray-600 mb-2"
+          >{{ field.label_tag }}</label
+        >
+        {{ field }}
+      </div>
+
+      <div class="text-rose-600 text-xs">{{ field.errors }}</div>
+      {% endfor %}
+
+      <div class="flex justify-between items-center mt-8">
+        <a
+          href="{% url 'index' %}"
+          class="inline-block px-4 py-2 transition hover:bg-gray-200 rounded-lg"
+          >Cancel</a
+        >
+        <button
+          type="submit"
+          class="inline-block px-8 py-2 transition text-white bg-blue-500 hover:bg-blue-400 rounded-lg font-semibold"
+        >
+          Update Profile
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+{% endblock %}

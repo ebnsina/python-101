@@ -26,14 +26,22 @@
 
                 <div class="bg-white rounded-lg mb-3">
 
-                    <div class="flex justify-center items-center p-4">
-                        <small class="text-gray-600 text-sm block">{{ feed.posted_by }}</small>
-                        &middot;
-                        <time class="text-gray-600 text-sm block">{{ feed.posted_at|timesince }} ago</time>
+                    <div class="flex items-center p-4">
+                        {% if feed.posted_by.profile_photo %}
+                            <img class="w-12 h-12 rounded-full border border-gray-300" src="{{ feed.posted_by.profile_photo.url }}" alt="">
+                        {% else %}
+                            <div class="w-12 h-12 rounded-full border border-gray-300"></div>
+                        {% endif %}
+                        
+                        <div class="flex items-center ml-4">
+                            <small class="text-gray-600 text-sm block">{{ feed.posted_by }}</small>
+                            &middot;
+                            <time class="text-gray-600 text-sm block">{{ feed.posted_at|timesince }} ago</time>
+                        </div>
                     </div>
 
                     {% if feed.image %}
-                        <img src="{{ feed.image.url }}" alt={{ feed.title }} class="w-full h-72 object-cover">
+                        <img src="{{ feed.image.url }}" alt="{{ feed.title }}" class="w-full h-72 object-cover">
                     {% endif %}
 
                     <div class="p-4">
@@ -46,7 +54,7 @@
                         
                         {% comment %} <a href="{% url 'delete-post' feed.id %}" class="delete-btn">Delete</a> {% endcomment %}
 
-                        {% if request.user == feed.posted_by  %}
+                        {% if request.user.profile == feed.posted_by  %}
                             <a href="{% url 'edit-post' feed.id %}"  class="hover:bg-gray-200 px-4 py-2 rounded-lg transition">Edit</a>
                             <button type="button"  class="delete-btn hover:bg-gray-200 px-4 py-2 rounded-lg transition">Delete</a>
                         {% endif %}

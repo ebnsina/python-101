@@ -1,5 +1,21 @@
 FakeBook
 
+/posts => GET all feeds
+/posts/:id => GET single feed
+/posts/new => POST create single feed
+/posts/:id/edit => POST edit single feed
+/posts/:id/delete => POST delete single feed
+
+
+/posts/:id/comments => POST
+/posts/:id/comments/:id => POST
+
+/comments => GET all feeds
+/comments/:id => GET single feed
+/comments/new => POST create single feed
+/comments/:id/edit => POST edit single feed
+/comments/:id/delete => POST delete single feed
+
 CRUD
 
 create 
@@ -23,7 +39,7 @@ delete
     SPA vs. MPA: Authentication Strategy
     - Session
     - Cookie
-    - JSON Web Token
+    - JSON Web Token (JWT)
     - Password Less
 
 

@@ -1,8 +1,8 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Feed
-from .forms import FeedForm
+from .models import Feed, Comment
+from .forms import FeedForm, CommentForm
 
 
 def index(request):
@@ -21,7 +21,7 @@ def new_post(request):
 
         if form.is_valid():
             feed = form.save(commit=False)
-            feed.posted_by = request.user
+            feed.posted_by = request.user.profile
             feed.save()
 
             messages.success(request, "Post created successfully.")
@@ -33,10 +33,23 @@ def new_post(request):
 
 
 def single_post(request, pk):
+    form = CommentForm()
     feed = get_object_or_404(Feed, pk=pk)
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+           comment = form.save(commit=False)
+           comment.feed = feed
+           comment.author = request.user.profile
+           comment.save()
+           messages.success(request, "Comment added successfully.")
+
     return render(request, "feeds/post.html", {
-        'feed': feed
+        'feed': feed,
+        'form': form,
     })
+
 
 
 @login_required(login_url='login')
@@ -58,6 +71,7 @@ def edit_post(request, pk):
     })
 
 
+@login_required(login_url='login')
 def delete_post(request, pk):
     feed = get_object_or_404(Feed, pk=pk)
     feed.delete()
