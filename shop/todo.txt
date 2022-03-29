@@ -1,0 +1,40 @@
+## Shop
+
+- Customer
+    - name
+    - email
+    - phone
+    - location
+    - image
+
+- Category/Collection
+    - name
+    - slug
+    - created_at
+
+- Product
+    - name
+    - description
+    - image
+    - price
+    - discount_price
+    - shipping_price
+    - stocks
+    - created_at
+
+- Cart
+    - product
+    - quantity
+
+
+- Shipping
+    - city
+    - address
+    - zipcode / post_code
+
+- Order
+    - product
+
+- Order Item/Order Product
+    - product
+    - order
