@@ -2,18 +2,18 @@
 
 - Customer
     - name
-    - email
     - phone
     - location
     - image
 
 - Category/Collection
-    - name
+    - title
     - slug
     - created_at
 
 - Product
-    - name
+    - title
+    - slug
     - description
     - image
     - price
@@ -35,6 +35,16 @@
 - Order
     - product
 
+
 - Order Item/Order Product
     - product
     - order
+
+
+
+
+AJAX
+    - what is AJAX 
+    - JS promise
+    - then, catch
+    - async await

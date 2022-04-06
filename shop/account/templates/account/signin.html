@@ -6,6 +6,7 @@
 
 {% block content %}
     {% include 'includes/header.html' %}
+    {% include 'includes/message.html' %}
 
     <div class="container mt-3">
         <div class="row">
@@ -15,8 +16,8 @@
                     <form method="post">
                         {% csrf_token %}
                     <div class="mb-3">
-                        <label for="email" class="form-label">Email address</label>
-                        <input type="email" name="email" class="form-control" id="email">
+                        <label for="username" class="form-label">User Name</label>
+                        <input type="text" name="username" class="form-control" id="username">
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>

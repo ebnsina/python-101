@@ -6,22 +6,25 @@
 
 {% block content %}
     {% include 'includes/header.html' %}
+    {% include 'includes/message.html' %}
 
     <div class="container mt-3">
         <div class="row">
             <div class="col-md-6 offset-md-3">
           <div class="card p-4">
               <h2 class="text-center">Create a new account</h2>
+
                     <form method="post">
                         {% csrf_token %}
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email address</label>
-                        <input type="email" name="email" class="form-control" id="email">
+                   {% for field in form %}
+                         <div class="mb-3">
+                        <label for="email" class="form-label">{{ field.label_tag }}</label>
+                            {{ field }}
                     </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" name="password" class="form-control" id="password">
-                    </div>
+
+                   
+                    
+                   {% endfor %}
                     <button type="submit" class="btn btn-dark">Sign Up</button>
                 </form>
 
