@@ -1,4 +1,7 @@
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
 from django.db.models.signals import post_save, post_delete
+from django.conf import settings
 from django.dispatch import receiver
 from .models import User, Customer
 
@@ -7,7 +10,18 @@ from .models import User, Customer
 def create_customer(sender, instance, created, **kwargs):
     if created:
         Customer.objects.create(user=instance)
+
+    message = render_to_string('account/welcome-email.html', {'name': instance.get_full_name() })
+
+    send_mail(
+        'Welcome Email',
+        message,
+        settings.DEFAULT_FROM_EMAIL,
+        [instance.email],
+        fail_silently=False,
+    )
     
+
         
 
 @receiver(post_save, sender=Customer)
