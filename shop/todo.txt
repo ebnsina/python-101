@@ -5,8 +5,9 @@
     - phone
     - location
     - image
+    - user (fk)
 
-- Category/Collection
+- Category
     - title
     - slug
     - created_at
@@ -21,30 +22,35 @@
     - shipping_price
     - stocks
     - created_at
+    - category (fk)
 
-- Cart
-    - product
+- Order
+    - transaction_id
+    - is_complete
+    - placed_at
+    - customer (fk)
+
+
+- Order Item/Order Product
+    - order (fk)
+    - product (fk)
     - quantity
+    - placed_at
 
 
 - Shipping
     - city
     - address
-    - zipcode / post_code
-
-- Order
-    - product
-
-
-- Order Item/Order Product
-    - product
-    - order
+    - post_code
+    - order (fk)
+    - customer (fk)
 
 
-
+- XSS attack
+- SQL Injection
 
 AJAX
-    - what is AJAX 
+    - what is AJAX
     - JS promise
     - then, catch
     - async await

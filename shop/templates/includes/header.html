@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
-    <a class="navbar-brand" href="{% url 'index' %}">Django Shop</a>
+    <a class="navbar-brand" href="{% url 'index' %}"><i class="fa-solid fa-bag-shopping"></i> Django Shop</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -12,21 +12,21 @@
             {{ request.user }}
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">My Account</a></li>
-            <li><a class="dropdown-item" href="#">My Orders</a></li>
+            <li><a class="dropdown-item" href="{% url 'account' %}"><i class="fa-solid fa-user-check"></i> My Account</a></li>
+            <li><a class="dropdown-item" href="#"><i class="fa-solid fa-list-check"></i> My Orders</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="{% url 'signout' %}">Sign Out</a></li>
+            <li><a class="dropdown-item" href="{% url 'signout' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out</a></li>
           </ul>
         </li>
         {% else %}
          <li class="nav-item">
-          <a class="nav-link" href="{% url 'signin' %}">Sign In</a>
+          <a class="nav-link" href="{% url 'signin' %}"><i class="fa-solid fa-user"></i> Sign In</a>
         </li>
         {% endif %}
       </ul>
       <form class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+        <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
       </form>
     </div>
   </div>

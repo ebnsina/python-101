@@ -1,31 +1,33 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 
-{% load static %} 
+{% load static %}
 
-{% block title %}All Products - Django Shop {% endblock %} 
+{% block title %}All Products - Django Shop {% endblock %}
 
-{% block content %} 
+{% block content %}
 
 {% include 'includes/header.html'%}
 
+ {% include 'includes/slider.html' %}
+
 <div class="container mt-3">
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-2">
       <ul class="list-group">
         <li class="list-group-item active" aria-current="true">
-          Category
+         <i class="fa-solid fa-list"></i> Category
         </li>
-        
+
         {% for category in categories %}
             <li class="list-group-item">{{ category.title }}</li>
         {% endfor %}
       </ul>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-10">
       <div class="row">
         {% for product in products %}
         <div class="col-md-4">
-          <div class="card">
+          <div class="card mb-4">
             {% if product.image %}
             <img
               src="{{ product.image.url }}"
@@ -45,12 +47,12 @@
 
               <div class="d-flex justify-content-between align-items-center my-3">
                 <small class="card-text text-decoration-line-through">$ {{ product.price }}</small>
-                <h4 class="card-text">$ {{ product.discount_price }}</h4>
+                <h4 class="card-text"><i class="fa-solid fa-dollar-sign"></i> {{ product.discount_price }}</h4>
               </div>
 
-              <div class="d-flex align-items-center">
-                <a href="#" class="btn btn-light">View Details</a>
-                 <button type='button' class="btn btn-dark">Add To Cart</button>
+              <div class="d-flex justify-content-between align-items-center">
+                <a href="#" class="btn btn-dark"><i class="fa-solid fa-eye"></i> View Details</a>
+                 <button type='button' class="btn btn-primary"><i class="fa-solid fa-cart-plus"></i> Add To Cart</button>
               </div>
             </div>
           </div>

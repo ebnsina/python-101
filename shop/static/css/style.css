@@ -1,5 +1,70 @@
 body {
-    font-family: 'Jost', sans-serif;
+  font-family: 'Inter', sans-serif;
+  color: var(--text);
+}
+
+:root {
+  --primary: #00DD82;
+  --black: #222f3e;
+  --text: #1F1142;
+}
+
+.hero-slider {
+  padding: 1rem 0;
+}
+
+.hero-slider img {
+  height: 70vh;
+  object-fit: cover;
+  border-radius: 1rem;
+}
+
+.messages {
+    position: fixed;
+    top: 5rem;
+    right: 3rem;
+    font-weight: 700;
+    z-index: 10000;
+}
+
+.card {
+  transition: all .2s;
+  overflow: hidden;
+}
+
+.card img {
+  transition: all .2s;
+}
+
+.card:hover {
+  border-color: var(--primary);
+}
+
+.card:hover img {
+  transform: scale(1.1);
+}
+
+.list-group-item.active {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  font-size: 1.4rem;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+.btn-outline-success {
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.btn-primary:hover,
+.btn-outline-success:hover {
+  background-color: var(--primary);
+  border-color: var(--primary);
 }
 
 .truncate {
@@ -12,4 +77,9 @@ body {
 .card img {
   height: 250px;
   object-fit: cover;
+}
+
+.footer {
+  background-color: var(--black);
+  color: #fff;
 }
