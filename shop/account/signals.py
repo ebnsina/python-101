@@ -8,19 +8,19 @@ from .models import User, Customer
 
 @receiver(post_save, sender=User)
 def create_customer(sender, instance, created, **kwargs):
-    if created:
+    if created and instance.email:
         Customer.objects.create(user=instance)
 
-    message = render_to_string('account/welcome-email.html', {'name': instance.get_full_name() })
+        message = render_to_string('account/welcome-email.html', {'name': instance.get_full_name() })
 
-    send_mail(
-        'Welcome Email',
-        message,
-        settings.DEFAULT_FROM_EMAIL,
-        [instance.email],
-        fail_silently=False,
-    )
-    
+        send_mail(
+            'Welcome Email',
+            message,
+            settings.DEFAULT_FROM_EMAIL,
+            [instance.email],
+            fail_silently=False,
+        )
+        
 
         
 
