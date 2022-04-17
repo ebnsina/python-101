@@ -56,14 +56,40 @@ async function render() {
 }
 
 
-loadButton.addEventListener('click', render)
+if (loadButton) {
+  loadButton.addEventListener('click', render)
+}
 
 
 
+// Add To Cart
+const cartButtons = Array.from(document.querySelectorAll('.cart-btn'))
 
+function handleProduct() {
+  // const id = this.dataset.id;
+  // const action = this.dataset.action;
+  const { id, action } = this.dataset;
+  addToCart(id, action)
+}
 
+async function addToCart(id, action) {
+  try {
+    fetch('/add_to_cart/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': csrfToken
+      },
+      body: JSON.stringify({id, action, 'HI':' HELLO'})
+    })
 
+    location.reload()
+  } catch (error) {
+    console.log(error)
+  }
+}
 
+cartButtons.forEach((button) => button.addEventListener('click', handleProduct))
 
 
 

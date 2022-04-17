@@ -40,6 +40,19 @@ class Order(models.Model):
         return str(self.id)
 
 
+    @property
+    def get_cart_total(self):
+        orderitems = self.orderitem_set.all()
+        return sum([item.get_total for item in orderitems])
+
+    @property
+    def get_cart_item(self):
+        orderitems = self.orderitem_set.all()
+        return sum([item.quantity for item in orderitems])
+
+    
+
+
 class OrderItem(models.Model):
     quantity = models.IntegerField(default=0)
     placed_at = models.DateTimeField(auto_now_add=True)
@@ -51,6 +64,10 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return str(self.id)
+
+    @property
+    def get_total(self):
+        return self.product.discount_price * self.quantity
 
 
 class Shipping(models.Model):
