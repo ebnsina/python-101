@@ -54,3 +54,22 @@ AJAX
     - JS promise
     - then, catch
     - async await
+
+
+
+JSON - Java Script Object Notation
+AJAX  - Asynchronous JavaScript And XML 
+
+- then, catch
+- async await
+
+
+Tech Stack :
+- LAMP (Linux Apache MySQL PHP/Python)
+- MERN/MEVN/MEAN (MongoDB Express.js React/Vue/Angular Node.js)
+
+- Laravel (PHP)
+- Django (Python)
+- Ruby on Rails (Ruby)
+- Nest.js / Adonis (TS/JS)
+
