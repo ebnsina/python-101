@@ -55,7 +55,6 @@ async function render() {
   }
 }
 
-
 if (loadButton) {
   loadButton.addEventListener('click', render)
 }
@@ -80,7 +79,7 @@ async function addToCart(id, action) {
         'Content-Type': 'application/json',
         'X-CSRFToken': csrfToken
       },
-      body: JSON.stringify({id, action, 'HI':' HELLO'})
+      body: JSON.stringify({id, action})
     })
 
     location.reload()
@@ -93,5 +92,40 @@ cartButtons.forEach((button) => button.addEventListener('click', handleProduct))
 
 
 
+// Place order
+const shippingForm = document.querySelector('.shipping-form');
+
+let shippingData = {}
+
+async function placeOrder(e) {
+  e.preventDefault()
+
+  shippingData.city = this.city.value
+  shippingData.postcode = this.postcode.value
+  shippingData.address = this.address.value
+  shippingData.total = +total
+
+
+  try {
+    const res = await fetch('/place_order/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': csrfToken
+      },
+      body: JSON.stringify(shippingData)
+    })
+
+    const data = await res.json()
+
+    const stripe = Stripe(data.stripe_public_key)
+    await stripe.redirectToCheckout({ sessionId: data.session_id })
+  } catch (error) {
+    console.log(error)
+  }
+
+}
+
+shippingForm.addEventListener('submit', placeOrder)
 
 

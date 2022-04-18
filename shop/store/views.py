@@ -1,11 +1,19 @@
 import json
+import stripe
 from django.http import JsonResponse
+from django.urls import reverse
 from django.shortcuts import get_object_or_404, render
-from .models import Product, Category, Order, OrderItem
+from django.conf import settings
+from .models import Product, Category, Order, OrderItem, Shipping
+
+from .forms import ShippingForm
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
+
 
 def index(request):
     categories = Category.objects.all()
-    products = Product.objects.order_by('-created_at')
+    products = Product.objects.all()
     context =  { 'products': products, 'categories': categories }
     return render(request, 'store/index.html', context)
 
@@ -19,9 +27,14 @@ def cart(request):
     return render(request, 'store/cart.html', context)
 
 
-
 def checkout(request):
-    pass
+    form = ShippingForm()
+    customer = request.user.customer
+    order, created = Order.objects.get_or_create(customer=customer, is_complete=False)
+    items = order.orderitem_set.all() 
+    items_count = order.get_cart_item
+    context = {'items': items, 'items_count': items_count, 'order': order, 'form': form  }
+    return render(request, 'store/checkout.html', context)
 
 
 def add_to_cart(request):
@@ -44,6 +57,54 @@ def add_to_cart(request):
         orderItem.delete()
 
     return JsonResponse({ 'message': 'Add To Cart successfully'}, safe=False)
+
+
+def place_order(request):
+    data = json.loads(request.body)
+    city = data['city']
+    postcode = data['postcode']
+    address = data['address']
+    total = data['total']
+
+    customer = request.user.customer
+    order, created = Order.objects.get_or_create(customer=customer)
+
+    if order.get_cart_total == float(total):
+        order.is_complete = True
+    order.save()
+
+    Shipping.objects.create(city=city, postcode=postcode, address=address, order=order, customer=customer)
+
+    """ payment """
+    session = stripe.checkout.Session.create(
+    success_url=request.build_absolute_uri(reverse('thank_you')),
+    cancel_url=request.build_absolute_uri(reverse('index')),
+    line_items=[
+        {
+        "name": "Django Shop",
+        "amount": str(int(order.get_cart_total) * 100),
+        "quantity": 2,
+        'currency': 'usd'
+        },
+        ],
+    mode="payment",
+    )
+
+    # print(session)
+
+    return JsonResponse({
+        "message": "Order placed successfully.",
+        'stripe_public_key': settings.STRIPE_PUBLIC_KEY,
+        'session_id': session.id
+        }, safe=False)
+
+
+
+
+def thank_you(request):
+    return render(request, 'store/thank-you.html')
+
+
 
 
 

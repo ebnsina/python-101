@@ -147,3 +147,6 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'youremail@gmail.com'
 EMAIL_HOST_PASSWORD  = 'yourpassword'
 DEFAULT_FROM_EMAIL  = 'Django Shop <no-reply@django-shop.localhost>'
+
+STRIPE_PUBLIC_KEY = ''
+STRIPE_SECRET_KEY = ''
