@@ -14,7 +14,10 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 def index(request):
     categories = Category.objects.all()
     products = Product.objects.all()
-    context =  { 'products': products, 'categories': categories }
+    customer = request.user.customer
+    order, created = Order.objects.get_or_create(customer=customer, is_complete=False)
+    items_count = order.get_cart_item
+    context =  { 'products': products, 'categories': categories, 'items_count': items_count }
     return render(request, 'store/index.html', context)
 
 
@@ -83,7 +86,7 @@ def place_order(request):
         {
         "name": "Django Shop",
         "amount": str(int(order.get_cart_total) * 100),
-        "quantity": 2,
+        "quantity": order.get_cart_item,
         'currency': 'usd'
         },
         ],

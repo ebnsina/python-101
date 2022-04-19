@@ -105,6 +105,8 @@ async function placeOrder(e) {
   shippingData.address = this.address.value
   shippingData.total = +total
 
+  console.log(shippingData)
+
 
   try {
     const res = await fetch('/place_order/', {
@@ -118,6 +120,8 @@ async function placeOrder(e) {
 
     const data = await res.json()
 
+    console.log(data)
+
     const stripe = Stripe(data.stripe_public_key)
     await stripe.redirectToCheckout({ sessionId: data.session_id })
   } catch (error) {
@@ -126,6 +130,8 @@ async function placeOrder(e) {
 
 }
 
-shippingForm.addEventListener('submit', placeOrder)
+if (shippingForm) {
+  shippingForm.addEventListener('submit', placeOrder)
+}
 
 

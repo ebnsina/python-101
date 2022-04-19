@@ -46,6 +46,7 @@
     - customer (fk)
 
 
+
 - XSS attack
 - SQL Injection
 
@@ -73,3 +74,14 @@ Tech Stack :
 - Ruby on Rails (Ruby)
 - Nest.js / Adonis (TS/JS)
 
+Features :
+- Authentication & Authorization
+- Product List
+- Product Detail
+- Add To Cart
+- Checkout
+- Pagination
+- Search
+- Payment
+- Newsletter
+- Slider/Promo Area
