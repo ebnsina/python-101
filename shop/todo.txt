@@ -78,6 +78,8 @@ Features :
 - Authentication & Authorization
 - Product List
 - Product Detail
+- Email Sending
+- Customer create
 - Add To Cart
 - Checkout
 - Pagination

@@ -1,9 +1,11 @@
 import json
 import stripe
+from django.db.models import Q
 from django.http import JsonResponse
 from django.urls import reverse
 from django.shortcuts import get_object_or_404, render
 from django.conf import settings
+from django.core.paginator import Paginator
 from .models import Product, Category, Order, OrderItem, Shipping
 
 from .forms import ShippingForm
@@ -13,11 +15,39 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 def index(request):
     categories = Category.objects.all()
-    products = Product.objects.all()
-    customer = request.user.customer
-    order, created = Order.objects.get_or_create(customer=customer, is_complete=False)
-    items_count = order.get_cart_item
-    context =  { 'products': products, 'categories': categories, 'items_count': items_count }
+    
+    try:
+        customer = request.user.customer
+    except:
+        pass
+    # order, created = Order.objects.get_or_create(customer=customer, is_complete=False)
+    # items_count = order.get_cart_item
+    # context =  { 'products': products, 'categories': categories, 'items_count': items_count }
+
+
+    queryset = Product.objects.all()
+    paginator = Paginator(queryset, 6)
+    products = paginator.get_page(request.GET.get('page'))
+
+    if request.method == 'POST':
+        query = request.POST.get('query')
+        # results = Product.objects.filter(title__icontains=query)
+        results = Product.objects.filter(Q(title__icontains=query) | Q(price__icontains=query) )
+        context =  { 'results': results, 'query': query}
+        return render(request, 'store/search-result.html', context)
+
+
+    context =  { 'products': products, 'categories': categories }
+    return render(request, 'store/index.html', context)
+
+
+def show(request):
+    pass
+
+
+def product_by_category(request, slug):
+    products = Product.objects.filter(category__slug=slug)
+    context =  { 'products': products }
     return render(request, 'store/index.html', context)
 
 

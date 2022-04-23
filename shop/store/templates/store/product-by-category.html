@@ -8,24 +8,8 @@
 
 {% include 'includes/header.html'%}
 
- {% include 'includes/slider.html' %}
-
 <div class="container mt-3">
-  <div class="row"> 
-    <div class="col-md-2">
-      <ul class="list-group">
-        <li class="list-group-item active" aria-current="true">
-         <i class="fa-solid fa-list"></i> Category
-        </li>
-
-        {% for category in categories %}
-            <li class="list-group-item">
-              <a href="{% url 'product_by_category' category.slug %}">{{ category.title }}</a>
-            </li>
-        {% endfor %}
-      </ul>
-    </div>
-    <div class="col-md-10">
+   <div class="col-md-10">
       <div class="row">
         {% for product in products %}
         <div class="col-md-4">
@@ -62,34 +46,6 @@
         {% endfor %}
       </div>
       
-      
-      <div class="row">
-        <div class="col-md-10">
-
-      <div class="pagination">
-          <span class="step-links">
-              {% if products.has_previous %}
-                  <a href="?page=1">&laquo; first</a>
-                  <a href="?page={{ products.previous_page_number }}">previous</a>
-              {% endif %}
-
-              <span class="current">
-                  Page {{ products.number }} of {{ products.paginator.num_pages }}.
-              </span>
-
-              {% if products.has_next %}
-                  <a href="?page={{ products.next_page_number }}">next</a>
-                  <a href="?page={{ products.paginator.num_pages }}">last &raquo;</a>
-              {% endif %}
-          </span>
-      </div>
-        </div>
-      </div>
-
-  
-      </div>
     </div>
-
-  </div>
 </div>
 {% endblock %}
